@@ -48,17 +48,14 @@ fun partTwo(fileName: String) {
     * Z = WIN
     * */
     File(fileName).forEachLine {
-        val words = it.split("\\s".toRegex()).toTypedArray()
+        val words = it.split("\\s".toRegex())
         val opponentsPlay = RPS.fromInt(Plays.valueOf(words[0]).value)
 
         val myPlay: RPS
-
-        if (words[1] == "Z") {
-            myPlay = win(opponentsPlay);
-        } else if (words[1] == "X") {
-            myPlay = loose(opponentsPlay)
-        } else {
-            myPlay = opponentsPlay
+        when (words[1]) {
+            "Z" -> myPlay = win(opponentsPlay)
+            "X" -> myPlay = loose(opponentsPlay)
+            else -> myPlay = opponentsPlay
         }
 
         myScore += getScore(myPlay, opponentsPlay)
@@ -117,6 +114,6 @@ fun main(args: Array<String>) {
     var inputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/day02/input.txt").toString()
     var testInputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/day02/test-input.txt").toString()
 
-    partOne(inputFileName)
-    partTwo(inputFileName)
+    partOne(inputFileName) // 10404
+    partTwo(inputFileName) // 10334
 }
