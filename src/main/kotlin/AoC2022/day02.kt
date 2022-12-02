@@ -12,6 +12,13 @@ enum class Plays(val value: Int) {
     Z(3);
 }
 
+
+enum class PlaysP2(val value: Int) {
+    A(1),
+    B(2),
+    C(3),
+}
+
 enum class RPS (val value: Int) {
     ROCK(1),
     PAPER(2),
@@ -39,6 +46,50 @@ fun partOne(fileName: String) {
 
     println(myScore)
 }
+
+fun partTwo(fileName: String) {
+    var myScore = 0
+    /*
+    * X = LOSE
+    * Y = DRAW
+    * Z = WIN
+    * */
+    File(fileName).forEachLine {
+        val words = it.split("\\s".toRegex()).toTypedArray()
+        val opponentsPlay = RPS.fromInt(Plays.valueOf(words[0]).value)
+
+        val myPlay: RPS
+
+        if (words[1] == "Z") {
+            myPlay = win(opponentsPlay);
+        } else if (words[1] == "X") {
+            myPlay = loose(opponentsPlay)
+        } else {
+            myPlay = opponentsPlay
+        }
+
+        myScore += getScore(myPlay, opponentsPlay)
+    }
+
+    println(myScore)
+}
+
+fun win(opponentsPlay: RPS): RPS {
+    return when (opponentsPlay) {
+        RPS.ROCK -> RPS.PAPER
+        RPS.PAPER -> RPS.SCISSORS
+        else -> RPS.ROCK
+    }
+}
+
+fun loose(opponentsPlay: RPS): RPS {
+    return when (opponentsPlay) {
+        RPS.ROCK -> RPS.SCISSORS
+        RPS.PAPER -> RPS.ROCK
+        else -> RPS.PAPER
+    }
+}
+
 fun getScore(myPlay: RPS, opponentsPlay: RPS): Int {
     var myScore = 0
     if (myPlay == opponentsPlay) {
@@ -66,6 +117,7 @@ fun getScore(myPlay: RPS, opponentsPlay: RPS): Int {
 
     return myScore
 }
+
 fun main(args: Array<String>) {
     val projectDirAbsolutePath = Paths.get("").toAbsolutePath().toString()
 
@@ -73,5 +125,5 @@ fun main(args: Array<String>) {
     var testInputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/day02/test-input.txt").toString()
 
     partOne(inputFileName)
-
+    partTwo(inputFileName)
 }
