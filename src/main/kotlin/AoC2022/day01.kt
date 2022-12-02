@@ -54,8 +54,8 @@ fun findTopThreeElvesPartTwo(fileName: String) {
 fun main(args: Array<String>) {
     val projectDirAbsolutePath = Paths.get("").toAbsolutePath().toString()
 
-    var inputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/d1-input.txt").toString()
-    var testInputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/d1-test-input.txt").toString()
+    var inputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/day01/d1-input.txt").toString()
+    var testInputFileName = Paths.get(projectDirAbsolutePath, "/src/main/resources/day01/d1-test-input.txt").toString()
 
     findTopElfPartOne(inputFileName)
     findTopThreeElvesPartTwo(inputFileName)
