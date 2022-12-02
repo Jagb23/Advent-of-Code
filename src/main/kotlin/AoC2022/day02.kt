@@ -12,13 +12,6 @@ enum class Plays(val value: Int) {
     Z(3);
 }
 
-
-enum class PlaysP2(val value: Int) {
-    A(1),
-    B(2),
-    C(3),
-}
-
 enum class RPS (val value: Int) {
     ROCK(1),
     PAPER(2),
